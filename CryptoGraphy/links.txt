@@ -1,0 +1,40 @@
+http://ocpsoft.org/opensource/how-to-safely-add-modify-servlet-request-parameter-values/
+
+http://www.coderanch.com/t/364591/Servlets/java/read-request-body-filter
+http://www.jpalace.org/docs/technotes/spring/rest-security.html
+http://stackoverflow.com/questions/701681/how-can-i-read-an-httpservletreponses-output-stream
+http://stackoverflow.com/questions/3242236/capture-and-log-the-response-body
+http://stackoverflow.com/questions/14736328/looking-for-an-example-for-inserting-content-into-the-response-using-a-servlet-f
+http://angelborroy.wordpress.com/2009/03/04/dump-request-and-response-using-javaxservletfilter/
+http://stackoverflow.com/questions/1413129/modify-request-parameter-with-servlet-filter
+http://stackoverflow.com/questions/14348452/how-can-i-log-the-json-response-of-spring-3-controllers-with-responsebody-in-a?rq=1
+http://stackoverflow.com/questions/9417821/spring-httpmessageconverter-json-response-based-on-httpservletrequest?lq=1
+http://stackoverflow.com/questions/14705787/handlerinterceptoradapter-json-encoding-and-post-processing-of-response
+http://stackoverflow.com/questions/11609844/response-encoding-in-spring
+http://stackoverflow.com/questions/8849162/code-based-spring-security-configuration
+#######################################################################################################################################################
+http://tech.sarathdr.com/featured/android-app-java-rsa-public-key-encryption-and-php-server-side-decryption/
+
+http://www.androidsnippets.com/encrypt-decrypt-between-android-and-php
+
+
+https://github.com/rtyley/spongycastle
+
+=============================================================================================
+
+There are multiple ways to secure your restful webservices, unfortunately there are many links 
+which provides information to secure a soap web services, but as restful gaining popularity, it 
+is of utmost necessity to find a way to secure and to find a way to manage sessions of your 
+restful web service. So to secure my Spring MVC with restful support, You need to atleast consider for three Aspect
+
+1) Authentication. -- For Authentication Spring Security can be used.
+2) Authorization. -- For Authorizing a request OAuth can be used.
+3) Securing the communication. -- SSL can be used to secure the communication channel.
+4) Encryption -- Again Oauth can solve the purpose
+5) Message Signing. -- Again Oauth can solve the purpose
+
+So , to secure a restful webservice spring security + OAuth can be used. The other security mechanisms which can be used are Http Basic Security and Digest Security.
+
+Here is a very good example securing a spring restful webservice with spring security: http://java.dzone.com/articles/securing-restful-web-service
+
+Also to use spring security in conjunction with OAuth you can follow this tutorial:
