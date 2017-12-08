@@ -1,0 +1,920 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0
+           http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>dev.gsitgithub</groupId>
+    <artifactId>database-orm</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>Prof Java Webapp</name>
+    <description>Example exercise. Application description...</description>
+    <url>https://github.com/gsitgithub/</url>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/gsitgithub/prof-java-webapp</url>
+        <connection>scm:git:git://github.com/gsitgithub/prof-java-webapp.git</connection>
+        <developerConnection>scm:git:git@github.com:gsitgithub/prof-java-webapp.git</developerConnection>
+    </scm>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/gsitgithub/prof-java-webapp/issues</url>
+    </issueManagement>
+
+    <organization>
+        <name>Developers Area</name>
+        <url>https://github.com/gsitgithub</url>
+    </organization>
+
+    <developers>
+        <developer>
+            <id>gsitgithub</id>
+            <name>Gsit Developer</name>
+            <email>gsitgithub@gmail.com</email>
+            <roles>
+                <role>author</role>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+            <organization>https://github.com/gsitgithub</organization>
+        </developer>
+    </developers>
+
+	<modules>
+		<module>mango</module>
+		<module>jdbi</module>
+	</modules>
+	
+    <profiles>
+        <profile>
+            <id>default</id>
+            <activation>
+                <property>
+                    <name>!application.environment</name>
+                </property>
+            </activation>
+            <properties>
+                <application.environment>localhost</application.environment>
+            </properties>
+        </profile>
+        <profile>
+            <id>localhost</id>
+            <activation>
+                <property>
+                    <name>application.environment</name>
+                    <value>localhost</value>
+                </property>
+            </activation>
+        </profile>
+        <profile>
+            <id>development</id>
+            <activation>
+                <property>
+                    <name>application.environment</name>
+                    <value>development</value>
+                </property>
+            </activation>
+        </profile>
+        <profile>
+            <id>test</id>
+            <activation>
+                <property>
+                    <name>application.environment</name>
+                    <value>test</value>
+                </property>
+            </activation>
+        </profile>
+        <profile>
+            <id>production</id>
+            <activation>
+                <property>
+                    <name>application.environment</name>
+                    <value>production</value>
+                </property>
+            </activation>
+        </profile>
+    </profiles>
+
+    <prerequisites>
+        <maven>3.1.1</maven>
+    </prerequisites>
+
+    <properties>
+        <!-- Generic properties -->
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <!-- Build Properties -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <project.build.sourceJavaVersion>1.8</project.build.sourceJavaVersion>
+        <project.build.targetJavaVersion>1.8</project.build.targetJavaVersion>
+        <maven.build.timestamp.format>yyyy-MM-dd HH:mm</maven.build.timestamp.format>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <!-- WORKAROUND: Make maven.build.timestamp property available in resource filtering, see http://jira.codehaus.org/browse/MRESOURCES-99 -->
+
+        <!-- Skip artifact deployment, to work it, add inside an active profile-->
+        <maven.deploy.skip>true</maven.deploy.skip>
+
+        <!-- Dependency Versions (run "mvn versions:display-property-updates" to check for updates) -->
+        <javax.servlet.api.version>3.1.0</javax.servlet.api.version>
+
+        <!-- Test dependencies versions -->
+        <javamelody.version>1.56.0</javamelody.version>
+        <jminix.version>1.1.0</jminix.version>
+        <junit.version>4.12</junit.version>
+        <mockito.core.version>1.10.19</mockito.core.version>
+        <hamcrest.version>1.3</hamcrest.version>
+        <fest.version>2.0M10</fest.version>
+
+        <!-- Logging dependencies versions -->
+        <slf4j.version>1.7.12</slf4j.version>
+        <logback.version>1.1.3</logback.version>
+        <logj2.version>2.2</logj2.version>
+
+        <!-- Spring dependencies -->
+        <spring.version>4.1.6.RELEASE</spring.version>
+        <spring.data.jpa.version>1.8.0.RELEASE</spring.data.jpa.version>
+        <spring.security.version>4.0.1.RELEASE</spring.security.version>
+
+        <!-- HTML page UI-->
+        <thymeleaf.extras.data-attribute.version>1.3</thymeleaf.extras.data-attribute.version>
+        <thymeleaf.extras.springsecurity3.version>2.1.1.RELEASE</thymeleaf.extras.springsecurity3.version>
+        <thymeleaf.layout.dialect.version>1.2.5</thymeleaf.layout.dialect.version>
+        <thymeleaf.version>2.1.3.RELEASE</thymeleaf.version>
+        <datatables.thymeleaf.version>0.9.3</datatables.thymeleaf.version>
+
+        <!-- Database dependencies -->
+        <h2.version>1.4.196</h2.version>
+        <mysql.connector.java.version>5.1.35</mysql.connector.java.version>
+		<comsat.version>0.7.0</comsat.version>
+        <hibernate.version>4.3.9.Final</hibernate.version>
+        <hibernate.validator.version>5.1.3.Final</hibernate.validator.version>
+        <joda.time.version>2.7</joda.time.version>
+        <joda.money.version>0.10.0</joda.money.version>
+        <querydsl.version>3.6.3</querydsl.version>
+        <usertype.core.version>3.2.0.GA</usertype.core.version>
+        <common.dbcp.version>2.1</common.dbcp.version>
+        <hikaricp.version>2.3.7</hikaricp.version>
+        <hibernate-hikaricp.version>4.3.9.Final</hibernate-hikaricp.version>
+
+        <!-- Utilities -->
+        <commons.lang3.version>3.4</commons.lang3.version>
+        <guava.version>18.0</guava.version>
+
+        <!-- Converters -->
+        <gson.version>2.3.1</gson.version>
+        <jackson.jaxrs.version>2.5.3</jackson.jaxrs.version>
+
+        <!-- Optimizations boilerplate -->
+        <lambdaj.version>2.3.3</lambdaj.version>
+        <lombok.version>1.16.4</lombok.version>
+
+        <!-- Plugin Versions (run "mvn versions:display-property-updates" to check for updates) -->
+        <apt.plugin.version>1.1.3</apt.plugin.version>
+        <checkstyle.plugin.version>2.12.1</checkstyle.plugin.version>
+        <clean.plugin.version>2.6.1</clean.plugin.version>
+        <compiler.plugin.version>3.3</compiler.plugin.version>
+        <deploy.plugin.version>2.8.2</deploy.plugin.version>
+        <enforcer.plugin.version>1.4</enforcer.plugin.version>
+        <help.plugin.version>2.2</help.plugin.version>
+        <install.plugin.version>2.5.2</install.plugin.version>
+        <jetty.plugin.version>9.2.1.v20140609</jetty.plugin.version>
+        <properties.plugin.version>1.0-alpha-2</properties.plugin.version>
+        <release.plugin.version>2.5.2</release.plugin.version>
+        <resources.plugin.version>2.7</resources.plugin.version>
+        <surefire.plugin.version>2.18.1</surefire.plugin.version>
+        <tomcat7.plugin.version>2.2</tomcat7.plugin.version>
+        <versions.plugin.version>2.2</versions.plugin.version>
+        <war.plugin.version>2.6</war.plugin.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <!-- Makes sure no third-party library loads another version of Spring -->
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-framework-bom</artifactId>
+                <version>${spring.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-bom</artifactId>
+                <version>${logj2.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>jstl</artifactId>
+				<version>1.2</version>
+			</dependency>
+
+			<!-- Javax Servlet -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>javax.servlet-api</artifactId>
+				<version>${javax.servlet.api.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!-- Spring  Dependencies Start-->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+
+			<!-- Spring Aspects -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aspects</artifactId>
+				<version>${spring.version}</version>
+				<scope>compile</scope>
+			</dependency>
+
+			<!-- Spring Data JPA -->
+			<dependency>
+				<groupId>org.springframework.data</groupId>
+				<artifactId>spring-data-jpa</artifactId>
+				<version>${spring.data.jpa.version}</version>
+			</dependency>
+
+			<!-- Spring Security -->
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-web</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+			<!-- Spring  Dependencies End-->
+
+			<!-- Converters Start -->
+			<!-- Jackson Jaxrs -->
+			<!--<dependency>
+				<groupId>org.codehaus.jackson</groupId>
+				<artifactId>jackson-jaxrs</artifactId>
+				<version>${jackson.jaxrs.version}</version>
+			</dependency>-->
+
+			<!-- Gson -->
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>${gson.version}</version>
+			</dependency>
+			<!-- Converters end -->
+
+			<!-- Utilities Dependencies Start-->
+			<dependency>
+				<groupId>com.yellerapp</groupId>
+				<artifactId>high-scale-lib</artifactId>
+				<version>1.0.5</version>
+			</dependency>
+			<!-- Lombok -->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+				<type>jar</type>
+			</dependency>
+
+			<!-- Guava -->
+			<dependency>
+				<groupId>com.google.guava</groupId>
+				<artifactId>guava</artifactId>
+				<version>${guava.version}</version>
+			</dependency>
+
+			<!-- Apache Commons Lang -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons.lang3.version}</version>
+			</dependency>
+
+			<!-- Lambdaj -->
+			<dependency>
+				<groupId>com.googlecode.lambdaj</groupId>
+				<artifactId>lambdaj</artifactId>
+				<version>${lambdaj.version}</version>
+				<exclusions>
+					<!-- Exclude old version of hamcrest -->
+					<exclusion>
+						<artifactId>hamcrest-all</artifactId>
+						<groupId>org.hamcrest</groupId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			<!-- Utilities Dependencies End-->
+
+			<!-- Database Dependencies Start-->
+			<dependency>
+				<groupId>org.jfaster</groupId>
+				<artifactId>mango</artifactId>
+				<version>1.6.0</version>
+			</dependency>
+			<dependency>
+				<groupId>org.jdbi</groupId>
+				<artifactId>jdbi</artifactId>
+				<version>2.78</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.rkmk</groupId>
+				<artifactId>jdbi-folder</artifactId>
+				<version>1.3</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.loway.oss.ObjectiveSync</groupId>
+				<artifactId>ObjectiveSync</artifactId>
+				<version>0.1.4</version>
+			</dependency>
+			<dependency>
+				<groupId>org.sql2o</groupId>
+				<artifactId>core</artifactId>
+				<version>0.5.4</version>
+			</dependency>
+
+			<dependency>
+				<groupId>co.paralleluniverse</groupId>
+				<artifactId>comsat-jdbc</artifactId>
+				<version>${comsat.version}</version>
+			</dependency>
+			
+			<!-- MySQL -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.connector.java.version}</version>
+			</dependency>
+
+			<!-- MariaDB -->
+			<dependency>
+				<groupId>org.mariadb.jdbc</groupId>
+				<artifactId>mariadb-java-client</artifactId>
+				<version>2.2.0</version>
+			</dependency>
+
+			<!-- H2 DB -->
+			<dependency>
+				<groupId>com.h2database</groupId>
+				<artifactId>h2</artifactId>
+				<version>${h2.version}</version>
+			</dependency>
+			<!-- HikariCP -->  
+			<dependency>
+				<groupId>com.zaxxer</groupId>
+				<artifactId>HikariCP</artifactId>
+				<version>${hikaricp.version}</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.zaxxer</groupId>
+				<artifactId>HikariCP-java6</artifactId>
+				<version>${hikaricp.version}</version>
+				<scope>compile</scope>
+			</dependency>
+
+			<!-- Hibernate -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+
+			<!-- Hibernate Envers -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-envers</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+
+			<!-- Hibernate Validator -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-validator</artifactId>
+				<version>${hibernate.validator.version}</version>
+			</dependency>
+
+			<!-- QueryDSL -->
+			<dependency>
+				<groupId>com.mysema.querydsl</groupId>
+				<artifactId>querydsl-apt</artifactId>
+				<version>${querydsl.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.mysema.querydsl</groupId>
+				<artifactId>querydsl-jpa</artifactId>
+				<version>${querydsl.version}</version>
+			</dependency>
+
+			<!-- Joda Time -->
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>${joda.time.version}</version>
+			</dependency>
+
+			<!-- Joda Money -->
+			<dependency>
+				<groupId>org.joda</groupId>
+				<artifactId>joda-money</artifactId>
+				<version>${joda.money.version}</version>
+			</dependency>
+
+			<!-- Jadira Usertype (Integrates Joda Time and Joda Money with Hibernate) -->
+			<dependency>
+				<groupId>org.jadira.usertype</groupId>
+				<artifactId>usertype.core</artifactId>
+				<version>${usertype.core.version}</version>
+			</dependency>
+
+			<!-- Database Dependencies End -->
+
+			<!-- Logging Dependencies Start-->
+			<!-- Using Slf4J Api -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
+			<!-- Logback Only start -->
+			<!--<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>${logback.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-access</artifactId>
+				<version>${logback.version}</version>
+				<scope>provided</scope>
+			</dependency>-->
+			<!-- Logback Only END -->
+
+			<!-- Log4j2 Only Start -->
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-slf4j-impl</artifactId>
+				<version>${logj2.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-api</artifactId>
+				<version>${logj2.version}</version>
+				<scope>compile</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-core</artifactId>
+				<version>${logj2.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-jcl</artifactId>
+				<version>${logj2.version}</version>
+				<scope>runtime</scope>
+			</dependency>
+			<!--<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>log4j-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>-->
+			<!--    for Log4j2.0 API
+			<dependency>
+				<groupId>org.apache.logging.log4j</groupId>
+				<artifactId>log4j-taglib</artifactId>
+				<version>${logj2.version}</version>
+				<scope>runtime</scope>
+			</dependency>-->
+			<!-- Log4j2 Only END -->
+
+			<!-- Logging Dependencies End-->
+
+			<!-- Test Dependencies Start-->
+			<!-- JUnit -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- Mockito -->
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-core</artifactId>
+				<version>${mockito.core.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- Hamcrest -->
+			<dependency>
+				<groupId>org.hamcrest</groupId>
+				<artifactId>hamcrest-all</artifactId>
+				<version>${hamcrest.version}</version>
+			</dependency>
+
+			<!-- Spring Test -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-test</artifactId>
+				<version>${spring.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- Fest -->
+			<dependency>
+				<groupId>org.easytesting</groupId>
+				<artifactId>fest-assert-core</artifactId>
+				<version>${fest.version}</version>
+				<scope>test</scope>
+			</dependency>
+
+			<!-- Java Melody Monitoring -->
+			<dependency>
+				<groupId>net.bull.javamelody</groupId>
+				<artifactId>javamelody-core</artifactId>
+				<version>${javamelody.version}</version>
+			</dependency>
+
+			<!-- JMiniX -->
+			<dependency>
+				<groupId>org.jminix</groupId>
+				<artifactId>jminix</artifactId>
+				<version>${jminix.version}</version>
+			</dependency>
+			<!-- Test Dependencies End-->
+
+		</dependencies>
+    </dependencyManagement>
+	
+    <build>
+        <!-- Save Application Build Information -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>application_*.properties</include>
+                </includes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <!-- Set Java Version -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${compiler.plugin.version}</version>
+                <configuration>
+                    <source>${project.build.sourceJavaVersion}</source>
+                    <target>${project.build.targetJavaVersion}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                    <showDeprecation>true</showDeprecation>
+                    <optimize>true</optimize>
+                </configuration>
+            </plugin>
+
+            <!-- Clean Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>${clean.plugin.version}</version>
+            </plugin>
+
+            <!-- Install Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-install-plugin</artifactId>
+                <version>${install.plugin.version}</version>
+            </plugin>
+
+            <!-- War Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>${war.plugin.version}</version>
+                <configuration>
+                    <!-- Use Servlet Java Config instead of XML -->
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                </configuration>
+            </plugin>
+
+            <!-- Resources Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${resources.plugin.version}</version>
+            </plugin>
+
+            <!-- Deploy Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
+                <version>${deploy.plugin.version}</version>
+            </plugin>
+
+            <!-- Release Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>${release.plugin.version}</version>
+            </plugin>
+
+            <!-- Generate QueryDSL Help Classes -->
+            <plugin>
+                <groupId>com.mysema.maven</groupId>
+                <artifactId>apt-maven-plugin</artifactId>
+                <version>${apt.plugin.version}</version>
+                <dependencies>
+                    <dependency>
+                        <groupId>com.mysema.querydsl</groupId>
+                        <artifactId>querydsl-apt</artifactId>
+                        <version>${querydsl.version}</version>
+                    </dependency>
+                </dependencies>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>process</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>target/generated-sources/java</outputDirectory>
+                            <processor>com.mysema.query.apt.jpa.JPAAnnotationProcessor</processor>
+                            <options>
+                                <querydsl.excludedPackages>dev.gsitgithub.webapp.config
+                                </querydsl.excludedPackages>
+                            </options>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Run Unit Tests -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefire.plugin.version}</version>
+                <configuration>
+                    <parallel>methods</parallel>
+                    <threadCount>10</threadCount>
+                    <!-- Uncomment to skip tests -->
+                    <!--<skipTests>true</skipTests>-->
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
+                </configuration>
+            </plugin>
+
+            <!-- Checkstyle -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>${checkstyle.plugin.version}</version>
+                <configuration>
+                    <configLocation>${basedir}/src/test/resources/checkstyle.xml</configLocation>
+                    <failOnViolation>false</failOnViolation>
+                    <consoleOutput>true</consoleOutput>
+                    <suppressionsLocation>${basedir}/src/test/resources/suppressions.xml</suppressionsLocation>
+                    <includeTestSourceDirectory>true</includeTestSourceDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>check</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Enforce Java Version -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <version>${enforcer.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>enforce-banned-dependencies</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireJavaVersion>
+                                    <version>${project.build.targetJavaVersion}</version>
+                                </requireJavaVersion>
+                            </rules>
+                            <fail>true</fail>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Versions Plugin -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>versions-maven-plugin</artifactId>
+                <version>${versions.plugin.version}</version>
+            </plugin>
+
+            <!-- Help Plugin -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-help-plugin</artifactId>
+                <version>${help.plugin.version}</version>
+            </plugin>
+
+            <!-- Set System Properties -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>${properties.plugin.version}</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>set-system-properties</goal>
+                        </goals>
+                        <configuration>
+                            <properties>
+                                <property>
+                                    <name>application.environment</name>
+                                    <value>${application.environment}</value>
+                                </property>
+
+                                <property>
+                                    <name>logback.configurationFile</name>
+                                    <value>src/main/resources/logback.xml</value>
+                                </property>
+                            </properties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Embedded Tomcat Server -->
+            <!-- Start command: mvn tomcat7:run -->
+            <!-- Available at:  http://localhost:8080/application-name -->
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>${tomcat7.plugin.version}</version>
+                <configuration>
+                    <path>/${build.finalName}</path>
+                    <port>8080</port>
+                    <charset>UTF-8</charset>
+                    <uriEncoding>UTF-8</uriEncoding>
+                    <httpsPort>8443</httpsPort>
+                    <keystoreFile>${basedir}/src/test/resources/keystore</keystoreFile>
+                    <keystorePass>changeme</keystorePass>
+                </configuration>
+                <dependencies>
+                    <!-- Logback Access -->
+                    <dependency>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-access</artifactId>
+                        <version>${logback.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+            <!-- Embedded Jetty Server -->
+            <!-- Start command: mvn jetty:run -->
+            <!-- Available at:  http://localhost:8080/application-name -->
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.plugin.version}</version>
+                <configuration>
+                    <jettyXml>
+                        src/test/resources/jetty.xml,src/test/resources/jetty-http.xml,src/test/resources/jetty-ssl.xml,src/test/resources/jetty-https.xml
+                    </jettyXml>
+                    <webAppConfig>
+                        <contextPath>/${project.artifactId}</contextPath>
+                    </webAppConfig>
+                    <stopPort>18080</stopPort>
+                    <stopKey>stop-jetty</stopKey>
+                    <scanIntervalSeconds>1</scanIntervalSeconds>
+                    <requestLog implementation="ch.qos.logback.access.jetty.RequestLogImpl">
+                        <fileName>src/main/resources/logback-access.xml</fileName>
+                        <quiet>true</quiet>
+                    </requestLog>
+                </configuration>
+                <dependencies>
+                    <!-- Logback Access -->
+                    <dependency>
+                        <groupId>ch.qos.logback</groupId>
+                        <artifactId>logback-access</artifactId>
+                        <version>${logback.version}</version>
+                        <scope>runtime</scope>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.eclipse.m2e</groupId>
+                    <artifactId>lifecycle-mapping</artifactId>
+                    <version>1.0.0</version>
+                    <configuration>
+                        <lifecycleMappingMetadata>
+                            <pluginExecutions>
+                                <pluginExecution>
+                                    <pluginExecutionFilter>
+                                        <groupId>org.codehaus.mojo</groupId>
+                                        <artifactId>properties-maven-plugin</artifactId>
+                                        <versionRange>[1.0-alpha-2,)</versionRange>
+                                        <goals>
+                                            <goal>set-system-properties</goal>
+                                        </goals>
+                                    </pluginExecutionFilter>
+                                    <action>
+                                        <execute>
+                                            <runOnIncremental>false</runOnIncremental>
+                                        </execute>
+                                    </action>
+                                </pluginExecution>
+                            </pluginExecutions>
+                        </lifecycleMappingMetadata>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+
+        <finalName>pjava</finalName>
+        <!--<finalName>${project.artifactId}</finalName>-->
+    </build>
+
+    <repositories>
+        <!-- Spring Releases -->
+        <repository>
+            <id>spring.release</id>
+            <name>Spring Release Repository</name>
+            <url>http://repo.spring.io/release</url>
+        </repository>
+
+        <!-- Spring Milestones -->
+        <repository>
+            <id>spring.milestone</id>
+            <name>Spring Milestone Repository</name>
+            <url>http://repo.spring.io/milestone</url>
+        </repository>
+
+        <!-- Spring Snapshots -->
+        <repository>
+            <id>spring.snapshot</id>
+            <name>Spring Snapshot Repository</name>
+            <url>http://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+
+        <!-- Nexus Snapshots -->
+        <repository>
+            <id>sonatype-nexus</id>
+            <name>Sonatype Nexus Releases and Snapshots</name>
+            <url>https://oss.sonatype.org/content/groups/public</url>
+        </repository>
+
+        <!-- Lombok -->
+        <repository>
+            <id>lombok</id>
+            <url>http://projectlombok.org/mavenrepo</url>
+        </repository>
+
+        <!-- JMiniX -->
+        <repository>
+            <id>restlet</id>
+            <url>http://maven.restlet.org</url>
+        </repository>
+    </repositories>
+</project>
