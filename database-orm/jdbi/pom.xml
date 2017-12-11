@@ -5,7 +5,7 @@
            http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-	</parent>
+	<parent>
 		<groupId>dev.gsitgithub</groupId>
 		<artifactId>database-orm</artifactId>
 		<version>0.0.1-SNAPSHOT</version>
@@ -131,6 +131,11 @@
     </properties>
 
 	<dependencies>
+        <dependency>
+            <groupId>dev.gsitgithub</groupId>
+            <artifactId>common</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
 		<dependency>
 			<groupId>org.jdbi</groupId>
 			<artifactId>jdbi</artifactId>
